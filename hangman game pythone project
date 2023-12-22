@@ -1,0 +1,85 @@
+# Hangman project completed
+
+logo = '''
+| | | | __ _ _ __   __ _|  \/  | __ _ _ __ | |
+| |_| |/ _` | '_ \ / _` | |\/| |/ _` | '_ \| |
+|  _  | (_| | | | | (_| | |  | | (_| | | | |_|
+|_| |_|\__,_|_| |_|\__, |_|  |_|\__,_|_| |_(_)
+by ABHAY SINGH! (^_^)
+'''
+print(logo)
+stages = [
+    '''
+     +---+
+     O   |
+    /|\  |
+    / \  |
+        ===''',
+    '''
+     +---+
+     O   |
+    /|\  |
+    /    |
+        ===''',
+    '''
+     +---+
+     O   |
+    /|\  |
+         |
+        ===''',
+    '''
+     +---+
+     O   |
+    /|   |
+         |
+        ===''',
+    '''
+     +---+
+     O   |
+     |   |
+         |
+        ===''',
+    '''
+     +---+
+     O   |
+         |
+         |
+        ===''',
+]
+word_list = [
+"computer", "chocolate", "bicycle", "sunshine", "butterfly", 
+"kangaroo", "adventure", "pineapple", "telescope", "universe", 
+"watermelon", "fireworks", "dragonfly", "basketball", "backpack",
+ "snowflake", "caterpillar", "rainbow", "mystery"
+]
+import random
+chosen_word = random.choice(word_list)
+display = []
+for _ in range(len(chosen_word)):
+    display += "_"
+print(f"The solution is {chosen_word}")
+lives = 6
+end_of_game = False
+while not end_of_game:
+    guess = input("Guess the letter ").lower()
+    if guess in display:
+        print(f"You've alrady guessed {guess}.")
+    for position in range(len(chosen_word)):
+        letters = chosen_word[position]
+        if letters == guess:
+            display[position] = letters
+    if guess not in chosen_word:
+        print(f"You guessed the letter {guess} , thats not in the word. you lose a life")
+        lives -= 1
+        if lives == 0:
+            end_of_game = True
+            print(" You did't save hangman to hang.")
+    print(display)
+    if "_" not in display:
+        end_of_game = True
+        print("You saved the hangman to hang.")
+    print(stages[lives - 1])
+
+print("Thanks for playing ")
+# print("im successfully done my day 7th project")
+
